@@ -24,9 +24,6 @@
     "url": "https://github.com/xgfe/react-native-datepicker/issues"
   },
   "homepage": "https://github.com/xgfe/react-native-datepicker#readme",
-  "dependencies": {
-    "moment": "2.x.x"
-  },
   "devDependencies": {
     "babel-core": "^6.5.2",
     "babel-eslint": "^7.2.3",
