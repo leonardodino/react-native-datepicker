@@ -13,7 +13,7 @@ import {
   Animated,
   Keyboard,
 } from 'react-native'
-import styles from './style'
+import styles from './styles'
 
 const DISMISSED = DatePickerAndroid.dismissedAction
 const IS_24HOUR = true // [TODO]: check locale
@@ -24,10 +24,13 @@ const SUPPORTED_ORIENTATIONS = [
   'landscape-left',
   'landscape-right',
 ]
+
+const removeSeconds = string => string.replace(/[^\d]?\d\d([^\d]*)$/, '$1')
+
 const FORMAT_FUNCTIONS = {
-  date: 'toLocaleDateString',
-  time: 'toLocaleTimeString',
-  datetime: 'toLocaleString',
+  date: date => date.toLocaleDateString(),
+  time: date => removeSeconds(date.toLocaleTimeString()),
+  datetime: date => removeSeconds(date.toLocaleString()),
 }
 
 const isFunction = x => typeof x === 'function'
@@ -44,8 +47,12 @@ class DatePicker extends Component {
       allowPointerEvents: true,
     }
   }
-  onStartShouldSetResponder(e) {return true}
-  onMoveShouldSetResponder(e) {return true}
+  onStartShouldSetResponder(e) {
+    return true
+  }
+  onMoveShouldSetResponder(e) {
+    return true
+  }
   componentWillReceiveProps(nextProps) {
     if (nextProps.date !== this.props.date) {
       this.setState(state => ({...state, date: this._getDate(nextProps.date)}))
@@ -90,15 +97,15 @@ class DatePicker extends Component {
   _getDate = _date => {
     const {mode, minDate, maxDate} = this.props
     const date = _date instanceof Date ? _date : new Date()
-    if (minDate && (date < minDate)) return minDate
-    if (maxDate && (date > maxDate)) return maxDate
+    if (minDate && date < minDate) return minDate
+    if (maxDate && date > maxDate) return maxDate
     return date
   }
 
   _getDateStr = date => {
     const {mode} = this.props
     const format = FORMAT_FUNCTIONS[mode] || FORMAT_FUNCTIONS['date']
-    return date[format]()
+    return format(date)
   }
 
   _datePicked = date => exec(this.props.onDateChange, date)
@@ -114,15 +121,9 @@ class DatePicker extends Component {
   }
 
   _onDateChange = date => {
-    this.setState({
-      allowPointerEvents: false,
-      date: date,
-    })
-    const timeoutId = setTimeout(() => {
-      this.setState({
-        allowPointerEvents: true,
-      })
-      clearTimeout(timeoutId)
+    this.setState({allowPointerEvents: false, date})
+    setTimeout(() => {
+      this.setState({allowPointerEvents: true})
     }, 200)
   }
 
@@ -181,7 +182,9 @@ class DatePicker extends Component {
 
       if (mode === 'date') {
         DatePickerAndroid.open({
-          date, minDate, maxDate,
+          date,
+          minDate,
+          maxDate,
           mode: androidMode,
         }).then(this._onDatePicked)
       }
@@ -196,7 +199,9 @@ class DatePicker extends Component {
 
       if (mode === 'datetime') {
         DatePickerAndroid.open({
-          date, minDate, maxDate,
+          date,
+          minDate,
+          maxDate,
           mode: androidMode,
         }).then(this._onDatetimePicked)
       }
@@ -323,7 +328,6 @@ class DatePicker extends Component {
 DatePicker.defaultProps = {
   mode: 'date',
   androidMode: 'default',
-  date: '',
   height: 259, // component height: 216(DatePickerIOS) + 1(borderTop) + 42(marginTop), IOS only
   duration: 300, // slide animation duration time, default to 300ms, IOS only
   confirmBtnText: 'Confirm',
@@ -348,7 +352,7 @@ DatePicker.propTypes = {
   cancelBtnText: PropTypes.string,
   customStyles: PropTypes.object,
   disabled: PropTypes.bool,
-  onDateChange: PropTypes.func,
+  onDateChange: PropTypes.func.isRequired,
   onOpenModal: PropTypes.func,
   onCloseModal: PropTypes.func,
   onPressMask: PropTypes.func,
