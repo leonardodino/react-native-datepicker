@@ -1,5 +1,5 @@
 {
-  "name": "react-native-datepicker",
+  "name": "@leonardodino/react-native-datepicker",
   "version": "1.6.0",
   "description": "react-native DatePicker component Android and iOS",
   "main": "DatePicker.js",
@@ -10,15 +10,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/xgfe/react-native-datepicker.git"
+    "url": "git+https://github.com/leonardodino/react-native-datepicker.git"
   },
   "keywords": ["react-native", "DatePicker"],
-  "author": "xgfe",
+  "author": "leonardodino",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/xgfe/react-native-datepicker/issues"
+    "url": "https://github.com/leonardodino/react-native-datepicker/issues"
   },
-  "homepage": "https://github.com/xgfe/react-native-datepicker#readme",
+  "homepage": "https://github.com/leonardodino/react-native-datepicker#readme",
   "devDependencies": {
     "babel-core": "^6.5.2",
     "babel-jest": "21.2.0",
