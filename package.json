@@ -6,7 +6,8 @@
   "scripts": {
     "test": "jest --coverage",
     "coverage": "cat ./coverage/lcov.info | coveralls",
-    "precommit": "lint-staged"
+    "precommit": "lint-staged",
+    "np": "np --no-yarn --no-cleanup"
   },
   "repository": {
     "type": "git",
@@ -32,6 +33,7 @@
     "jsdom": "^11.3.0",
     "jsdom-global": "^3.0.2",
     "lint-staged": "^5.0.0",
+    "np": "^2.17.0",
     "prettier": "1.8.2",
     "react": "16.0.0-beta.5",
     "react-dom": "16.0.0-beta.5",
