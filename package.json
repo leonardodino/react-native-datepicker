@@ -6,7 +6,7 @@
   "scripts": {
     "test": "jest --coverage",
     "coverage": "cat ./coverage/lcov.info | coveralls",
-    "lint": "eslint ."
+    "lint": "exit 0"
   },
   "repository": {
     "type": "git",
@@ -24,15 +24,11 @@
   "homepage": "https://github.com/xgfe/react-native-datepicker#readme",
   "devDependencies": {
     "babel-core": "^6.5.2",
-    "babel-eslint": "^7.2.3",
     "babel-jest": "21.2.0",
     "babel-preset-react-native": "4.0.0",
     "coveralls": "^2.11.9",
-    "cz-conventional-changelog": "^1.2.0",
     "enzyme": "^3.1.0",
     "enzyme-adapter-react-16": "^1.0.2",
-    "eslint": "^3.19.0",
-    "eslint-plugin-react": "^7.0.1",
     "inquirer": "^3.0.5",
     "jest": "^21.2.1",
     "jsdom": "^11.3.0",
