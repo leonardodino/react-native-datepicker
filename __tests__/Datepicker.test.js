@@ -24,7 +24,7 @@ describe('DatePicker', () => {
 
     expect(wrapper.state('date')).toBeInstanceOf(Date)
     expect(wrapper.state('modalVisible')).toEqual(false)
-    expect(wrapper.state('animatedHeight')).toBeInstanceOf(Animated.Value)
+    expect(wrapper.state('translateY')).toBeInstanceOf(Animated.Value)
 
     const wrapper1 = shallow(
       <DatePicker
@@ -35,7 +35,7 @@ describe('DatePicker', () => {
         cancelBtnText="Cancel"
         customStyles={{testStyle: 123}}
         disabled={true}
-      />
+      />,
     )
     const datePicker1 = wrapper1.instance()
 
@@ -54,7 +54,7 @@ describe('DatePicker', () => {
         onDateChange={date => {
           dateStr = date
         }}
-      />
+      />,
     )
     const datePicker = wrapper.instance()
 
@@ -75,7 +75,7 @@ describe('DatePicker', () => {
         onDateChange={value => {
           date = value
         }}
-      />
+      />,
     )
     const datePicker = wrapper.instance()
 
@@ -89,7 +89,7 @@ describe('DatePicker', () => {
         onDateChange={value => {
           dateMax = value
         }}
-      />
+      />,
     )
     const datePickerMax = wrapperMax.instance()
 
@@ -103,7 +103,7 @@ describe('DatePicker', () => {
         onDateChange={value => {
           dateNormal = value
         }}
-      />
+      />,
     )
     const datePickerNormal = wrapperNormal.instance()
 
@@ -115,15 +115,13 @@ describe('DatePicker', () => {
     const wrapper = shallow(<DatePicker />)
     const datePicker = wrapper.instance()
 
-    datePicker._setModalVisible(true)
+    datePicker._showModal()
 
     expect(wrapper.state('modalVisible')).toEqual(true)
-    expect(wrapper.state('animatedHeight')._animation._toValue).toBeGreaterThan(
-      200
-    )
+    expect(wrapper.state('translateY')._animation._toValue).toEqual(0)
 
-    datePicker._setModalVisible(false)
-    expect(wrapper.state('animatedHeight')._animation._toValue).toEqual(0)
+    datePicker._hideModal()
+    expect(wrapper.state('translateY')._animation._toValue).toEqual(datePicker.props.height)
   })
 
   it('onPressCancel', () => {
@@ -276,7 +274,7 @@ describe('DatePicker', () => {
         minDate={new Date('2016-04-01')}
         maxDate={new Date('2016-06-01')}
         onOpenModal={onOpenModal}
-      />
+      />,
     )
     const datePicker = wrapper.instance()
     datePicker._setModalVisible = setModalVisible
@@ -288,9 +286,7 @@ describe('DatePicker', () => {
 
     wrapper.setProps({disabled: false})
     datePicker._onPressDate()
-    expect(wrapper.state('date')).toMatchObject(
-      datePicker._getDate(new Date('2016-05-06'))
-    )
+    expect(wrapper.state('date')).toMatchObject(datePicker._getDate(new Date('2016-05-06')))
     expect(setModalVisible).toHaveBeenCalledTimes(1)
     expect(onOpenModal).toHaveBeenCalledTimes(1)
 
@@ -333,9 +329,7 @@ describe('DatePicker', () => {
     const wrapper = shallow(<DatePicker date={date} />)
     const datePicker = wrapper.instance()
 
-    expect(datePicker._getTitleElement().props.children).toEqual(
-      datePicker._getDateStr(date)
-    )
+    expect(datePicker._getTitleElement().props.children).toEqual(datePicker._getDateStr(date))
   })
 
   it('`date` prop changes', () => {
