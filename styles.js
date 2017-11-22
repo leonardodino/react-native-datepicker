@@ -51,7 +51,7 @@ let style = StyleSheet.create({
     justifyContent: 'center',
   },
   btnTextText: {
-    fontWeight: 'bold',
+    fontWeight: '600',
     color: '#007aff',
     fontSize: 16,
   },
