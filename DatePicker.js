@@ -133,7 +133,7 @@ class DatePicker extends Component {
     const dateTextStyle = [styles.dateText, customStyles.dateText]
     const placeholderTextStyle = [styles.placeholderText, customStyles.placeholderText]
 
-    if (date) return <Text style={dateTextStyle}>{this._getDateStr(date)}</Text>
+    if (date instanceof Date) return <Text style={dateTextStyle}>{this._getDateStr(date)}</Text>
     if (placeholder) return <Text style={placeholderTextStyle}>{placeholder}</Text>
     return null
   }
