@@ -67,7 +67,10 @@ let style = StyleSheet.create({
   },
   datePicker: {
     marginTop: 42,
-    borderTopColor: '#ccc',
+    backgroundColor: '#F8F8F8',
+    borderTopColor: '#e5e5e5',
+    borderTopWidth: 1,
+    borderTopColor: '#e5e5e5',
     borderTopWidth: 1,
   },
   disabled: {
