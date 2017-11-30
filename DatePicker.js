@@ -15,6 +15,7 @@ import {
   Easing,
 } from 'react-native'
 import styles from './styles'
+import './IntlPatch'
 
 const EPSILON = 1e-9
 

@@ -50,5 +50,8 @@
       "prettier --no-bracket-spacing --print-width 100 --no-prose-wrap --no-semi --single-quote --trailing-comma all --write",
       "git add"
     ]
+  },
+  "dependencies": {
+    "intl": "^1.2.5"
   }
 }
