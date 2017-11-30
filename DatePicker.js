@@ -175,7 +175,7 @@ class DatePicker extends Component {
     }
     TimePickerAndroid.open(options)
       .then(obj => ({...obj, year, month, day}))
-      .then(this._onDatetimeTimePicked.bind(this, year, month, day))
+      .then(this._onDatetimeTimePicked)
   }
 
   _onDatetimeTimePicked = ({action, year, month, day, hour, minute}) => {
