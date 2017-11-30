@@ -40,9 +40,9 @@ const noop = () => undefined
 const removeSeconds = string => string.replace(/[^\d]?\d\d([^\d]*)$/, '$1')
 
 const FORMAT_FUNCTIONS = {
-  date: date => date.toLocaleDateString(),
-  time: date => removeSeconds(date.toLocaleTimeString()),
-  datetime: date => removeSeconds(date.toLocaleString()),
+  date: (date, locale) => date.toLocaleDateString(locale),
+  time: (date, locale) => removeSeconds(date.toLocaleTimeString(locale)),
+  datetime: (date, locale) => removeSeconds(date.toLocaleString(locale)),
 }
 
 const isFunction = x => typeof x === 'function'
@@ -122,9 +122,9 @@ class DatePicker extends Component {
   }
 
   _getDateStr = date => {
-    const {mode} = this.props
+    const {mode, locale} = this.props
     const format = FORMAT_FUNCTIONS[mode] || FORMAT_FUNCTIONS['date']
-    return format(date)
+    return format(date, locale)
   }
 
   _datePicked = date => exec(this.props.onDateChange, date)
@@ -351,6 +351,7 @@ DatePicker.defaultProps = {
   duration: 300, // slide animation duration time, default to 300ms, IOS only
   confirmBtnText: 'Confirm',
   cancelBtnText: 'Cancel',
+  locale: 'en',
   customStyles: {},
   disabled: false,
   hideText: false,
@@ -369,6 +370,7 @@ DatePicker.propTypes = {
   duration: PropTypes.number,
   confirmBtnText: PropTypes.string,
   cancelBtnText: PropTypes.string,
+  locale: PropTypes.string,
   customStyles: PropTypes.object,
   disabled: PropTypes.bool,
   onDateChange: PropTypes.func.isRequired,

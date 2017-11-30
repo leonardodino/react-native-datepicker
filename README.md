@@ -65,6 +65,7 @@ export default class MyDatePicker extends Component {
 | androidMode | 'default' | `enum` | The `enum` of `default`, `calendar` and `spinner` (only Android) |
 | confirmBtnText | 'Confirm' | `string` | Specify the text of confirm btn in ios. |
 | cancelBtnText | 'Cancel' | `string` | Specify the text of cancel btn in ios. |
+| locale | 'en' | `string` | Specify the [`bcp47`](https://tools.ietf.org/html/bcp47) locale for display. |
 | minDate | - | `date` | Restricts the range of possible date values. |
 | maxDate | - | `date` | Restricts the range of possible date values. |
 | duration | 300 | `number` | Specify the animation duration of datepicker.|
