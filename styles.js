@@ -6,6 +6,7 @@ let style = StyleSheet.create({
   },
   dateTouchBody: {
     flexDirection: 'row',
+    flex: 1,
     height: 40,
     alignItems: 'center',
     justifyContent: 'center',
@@ -26,9 +27,11 @@ let style = StyleSheet.create({
   },
   dateText: {
     color: '#333',
+    flex: 1,
   },
   placeholderText: {
     color: '#c9c9c9',
+    flex: 1,
   },
   datePickerMask: {
     flex: 1,
