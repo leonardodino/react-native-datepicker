@@ -41,11 +41,3 @@ export default class ExpoDatePicker extends React.Component {
     return <DatePicker locale={locale} {...props} ref={pickerRef} />
   }
 }
-
-export const importLocales = () => {
-  if (global.IntlPolyfill && typeof global.IntlPolyfill.__addLocaleData === 'function') {
-    try {
-      require('intl/locale-data/complete')
-    } catch (e) {}
-  }
-}

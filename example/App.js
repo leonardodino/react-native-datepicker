@@ -4,6 +4,14 @@ import {Util} from 'expo'
 import DatePicker from './lib/expo'
 const NEUTRAL_STATE_COLOR = '#D5D8DB'
 
+// can't use dynamic imports on expo, oh well...
+// load'em all while Android lacks propper Intl
+if (global.IntlPolyfill && typeof global.IntlPolyfill.__addLocaleData === 'function') {
+  try {
+    require('intl/locale-data/complete')
+  } catch (e) {}
+}
+
 export default class App extends React.Component {
   state = {date: new Date(), birthday: null}
   render() {
